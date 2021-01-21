@@ -11,9 +11,10 @@
 
 import sys
 
-# import PyQt4 QtCore and QtGui modules
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+# import PyQt5 QtCore and QtGui modules
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QApplication
 
 from ImageImportWindow import ImageImportWindow
 

@@ -9,7 +9,7 @@
 # License GNU GPL v3
 #
 #
-from PyQt4 import QtGui, QtCore, uic
+from PyQt5 import QtGui, QtCore, uic
 
 import sys, os
 
@@ -17,7 +17,7 @@ import sys, os
 from brainvisa import axon
 from brainvisa.data.readdiskitem import ReadDiskItem
 from brainvisa.data.writediskitem import WriteDiskItem
-import registration
+from brainvisa import registration
 import numpy
 
 from externalprocesses import *

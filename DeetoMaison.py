@@ -2,7 +2,7 @@
 
 #Import of Usefull Libraries
 import struct, time, re, os, json, subprocess
-from PyQt4 import QtGui, QtCore, uic, Qt
+from PyQt5 import QtGui, QtCore, uic, Qt
 import pdb
 from numpy import *
 from math import sqrt
@@ -42,11 +42,11 @@ class DeetoMaison(QtGui.QDialog):
           model.setItem(i+1, 0, item)
         self.listViewElectrodes.setModel(model)
         
-        self.connect(self.pushButtonOk, QtCore.SIGNAL('clicked()'), self.verifSelec)
-        self.connect(self.pushButtonCheckElec, QtCore.SIGNAL('clicked()'), self.check)
-        self.connect(self.pushButtonUncheckElec, QtCore.SIGNAL('clicked()'), self.uncheck)
-        self.connect(self.pushButtonElecAppear, QtCore.SIGNAL('clicked()'), self.printElec)
-        self.connect(self.pushButtonRemoveElec, QtCore.SIGNAL('clicked()'), self.removeElec)
+        self.pushButtonOk.clicked.connect(self.verifSelec)
+        self.pushButtonCheckElec.clicked.connect(self.check)
+        self.pushButtonUncheckElec.clicked.connect(self.uncheck)
+        self.pushButtonElecAppear.clicked.connect(self.printElec)
+        self.pushButtonRemoveElec.clicked.connect(self.removeElec)
         
        
   

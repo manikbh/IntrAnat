@@ -8,7 +8,7 @@
 
 
 import sys, os, pickle
-from PyQt4 import QtGui, QtCore, uic
+from PyQt5 import QtGui, QtCore, uic
 
 import anatomist.direct.api as anatomist
 from soma import aims
@@ -48,17 +48,17 @@ class ElectrodeEditorDialog(QtGui.QWidget):
     self.typeColors = {}
     
     # Linking UI elements to functions
-    self.connect(self.exitButton, QtCore.SIGNAL('clicked()'), self.quit)
-    self.connect(self.openButton, QtCore.SIGNAL('clicked()'), self.open)
-    self.connect(self.saveButton, QtCore.SIGNAL('clicked()'), self.save)
-    self.connect(self.addButton, QtCore.SIGNAL('clicked()'), self.addCylinder)
-    self.connect(self.updateButton, QtCore.SIGNAL('clicked()'), self.updateCylinder)
-    self.connect(self.deleteButton, QtCore.SIGNAL('clicked()'), self.deleteCylinder)
-    self.connect(self.axisCombo,  QtCore.SIGNAL('currentIndexChanged(QString)'), self.axisChanged)
-    #self.connect(self.typeCombo, QtCore.SIGNAL('currentIndexChanged(QString)'), self.updateName)
+    self.exitButton.clicked.connect(self.quit)
+    self.openButton.clicked.connect(self.open)
+    self.saveButton.clicked.connect(self.save)
+    self.addButton.clicked.connect(self.addCylinder)
+    self.updateButton.clicked.connect(self.updateCylinder)
+    self.deleteButton.clicked.connect(self.deleteCylinder)
+    self.axisCombo.currentIndexChanged[str].connect(self.axisChanged)
+    #self.typeCombo.currentIndexChanged[str].connect(self.updateName)
     
     self.cylinderList.sortItems(QtCore.Qt.AscendingOrder)
-    self.connect(self.cylinderList, QtCore.SIGNAL("currentItemChanged(QListWidgetItem*,QListWidgetItem*)"), self.cylinderListClick) #itemClicked
+    self.cylinderList, QtCore.SIGNAL("currentItemChanged(QListWidgetItem*,QListWidgetItem*)"), self.cylinderListClick) #itemClicked
     
     # Anatomist windows
     if anato is None:

@@ -8,7 +8,7 @@
 # License GNU GPL v3
 #
 #
-from PyQt4 import QtGui, QtCore, uic
+from PyQt5 import QtGui, QtCore, uic
 
 import sys, pdb
 

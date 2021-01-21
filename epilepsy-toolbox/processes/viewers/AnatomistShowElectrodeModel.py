@@ -29,10 +29,9 @@
 # The fact that you are presently reading this means that you have had
 # knowledge of the CeCILL license version 2 and that you accept its terms.
 
-from neuroProcesses import *
-import shfjGlobals
+from brainvisa.processes import *
 from brainvisa import anatomist
-import glob, registration
+
 #from editor import ElectrodeEditorDialog
 
 name = 'Anatomist Show Electrode Model'

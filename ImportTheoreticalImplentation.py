@@ -4,7 +4,7 @@
 import sys, os, pickle,numpy, re, string, json, csv, pdb
 
 
-from PyQt4 import QtGui, QtCore, uic, Qt
+from PyQt5 import QtGui, QtCore, uic, Qt
 
 
 

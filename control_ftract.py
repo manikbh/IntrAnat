@@ -37,7 +37,7 @@ from soma import aims
 from soma.aims import colormaphints
 import sys, os, math
 import pdb
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 
 sys.path.insert( 0, '.' )
 
@@ -45,11 +45,11 @@ sys.path.insert( 0, '.' )
 # determine wheter we are using Qt4 or Qt3, and hack a little bit accordingly
 # the boolean qt4 gloabl variable will tell it for later usage
 #qt4 = False
-#if sys.modules.has_key( 'PyQt4'):
+#if sys.modules.has_key( 'PyQt5'):
   #qt4 = True
   #
   #qt = QtGui
-  #from PyQt4.uic import loadUi
+  #from PyQt5.uic import loadUi
 #else:
   #import qt, qtui
   #loadUi = qtui.QWidgetFactory.create

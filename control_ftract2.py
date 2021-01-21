@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from anatomist import cpp as ana
-from PyQt4 import QtGui, QtCore, uic
+from PyQt5 import QtGui, QtCore, uic
 import pdb
 
 class ControlFtract(ana.Control):

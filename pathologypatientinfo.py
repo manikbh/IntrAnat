@@ -8,7 +8,7 @@
 #
 # License GNU GPL v3
 
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore
 import pdb, os, json
 from brainvisa.data.writediskitem import ReadDiskItem, WriteDiskItem
 

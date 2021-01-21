@@ -29,10 +29,9 @@
 # The fact that you are presently reading this means that you have had
 # knowledge of the CeCILL license version 2 and that you accept its terms.
 
-import shfjGlobals
-
 include( 'builtin' )
 include( 'registration' )
+include( 'anatomy' )
 
 ####################### File Formats ##########################
 Format( 'Electrode Implantation format', 'f|*.elecimplant' )

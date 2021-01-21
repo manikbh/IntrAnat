@@ -10,7 +10,7 @@
 # TODO : redo using QRunnable instead of QThread with QThreadPool.globalInstancer().start(myRunnable)
 
 import subprocess, os, types, tempfile, time, random, string,sys
-from PyQt4 import QtCore
+from PyQt5 import QtCore
 import pdb
 
 

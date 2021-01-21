@@ -38,8 +38,8 @@
 import sys, os, pickle, glob, numpy, re, string, time, subprocess, json, copy, csv, gc  #gc.get_referrers pour trouver où est encore déclarer une variable (pour problem quand variable déclarer en python et en c++)
 import openpyxl
 
-from PyQt4 import QtGui, QtCore, uic, Qt
-from PyQt4.QtGui import QVBoxLayout
+from PyQt5 import QtGui, QtCore, uic, Qt
+from PyQt5.QtWidgets import QVBoxLayout
 
 from numpy import *
 from math import sqrt, cos, sin
@@ -51,7 +51,7 @@ from brainvisa import axon
 #from soma.aims.spmnormalizationreader import readSpmNormalization
 from brainvisa import anatomist
 from brainvisa.data import neuroHierarchy
-import registration
+from brainvisa import registration
 
 from externalprocesses import *
 from MicromedListener import MicromedListener as ML
@@ -59,12 +59,11 @@ from referentialconverter import ReferentialConverter
 from checkSpmVersion import *
 from readSulcusLabelTranslationFile import *
 from readFreesurferLabelFile import *
-from neuroProcesses import defaultContext
+from brainvisa.processes import defaultContext
 from TimerMessageBox import *
 from generate_contact_colors import *
 from bipoleSEEGColors import bipoleSEEGColors
 from DeetoMaison import DeetoMaison
-#from neuroProcesses import *
 
 import ImportTheoreticalImplentation
 from scipy import ndimage
@@ -531,43 +530,43 @@ class LocateElectrodes(QtGui.QDialog):
 
     if loadAll == True:
       # Linking UI elements to functions
-      self.connect(self.loadPatientButton, QtCore.SIGNAL('clicked()'), self.loadPatient)
-      self.connect(self.changePatientButton, QtCore.SIGNAL('clicked()'), self.changePatient)
-      self.connect(self.patientList, QtCore.SIGNAL('itemDoubleClicked(QListWidgetItem*)'), lambda x:self.loadPatient())
-      self.connect(self.protocolCombo, QtCore.SIGNAL('currentIndexChanged(int)'), self.updateBrainvisaProtocol)
-      self.connect(self.filterSiteCombo, QtCore.SIGNAL('currentIndexChanged(int)'), self.filterSubjects)
-      self.connect(self.filterYearCombo, QtCore.SIGNAL('currentIndexChanged(int)'), self.filterSubjects)
-      self.connect(self.addElectrodeButton, QtCore.SIGNAL('clicked()'), self.addElectrode)
-      self.connect(self.removeElectrodeButton, QtCore.SIGNAL('clicked()'), self.removeElectrode)
-      self.connect(self.nameEdit, QtCore.SIGNAL('editingFinished()'), self.editElectrodeName)
-      self.connect(self.targetButton,  QtCore.SIGNAL('clicked()'), self.updateTarget)
-      self.connect(self.entryButton,  QtCore.SIGNAL('clicked()'), self.updateEntry)
-      self.connect(self.electrodeList, QtCore.SIGNAL("currentRowChanged(int)"), self.electrodeSelect)
-      self.connect(self.electrodeList, QtCore.SIGNAL("itemDoubleClicked(QListWidgetItem*)"), self.electrodeGo)
-      self.connect(self.contactList, QtCore.SIGNAL("itemClicked(QListWidgetItem*)"), self.contactSelect)
-      self.connect(self.contactList, QtCore.SIGNAL("itemDoubleClicked(QListWidgetItem*)"), self.contactGo)
-      self.connect(self.typeComboBox, QtCore.SIGNAL('currentIndexChanged(QString)'), self.updateElectrodeModel)
-      # itemClicked(QListWidgetItem*) , currentItemChanged ( QListWidgetItem * current, QListWidgetItem * previous ), currentRowChanged ( int currentRow )
-      self.connect(self.electrodeLoadButton, QtCore.SIGNAL('clicked()'), self.loadElectrodes)
-      self.connect(self.electrodeSaveButton, QtCore.SIGNAL('clicked()'), self.saveElectrodes)
-      self.connect(self.normalizeExportButton, QtCore.SIGNAL('clicked()'), self.normalizeExportElectrodes)
-      #self.connect(self.marsatlasExportButton, QtCore.SIGNAL('clicked()'),self.parcelsExportElectrodes)
-      self.connect(self.colorConfigButton, QtCore.SIGNAL('clicked()'), self.configureColors)
-      self.connect(self.dispModeCombo, QtCore.SIGNAL('currentIndexChanged(int)'), self.updateDispMode)
-      self.connect(self.windowCombo1, QtCore.SIGNAL('currentIndexChanged(QString)'), lambda s: self.windowUpdate(0,s))
-      self.connect(self.windowCombo2, QtCore.SIGNAL('currentIndexChanged(QString)'), lambda s: self.windowUpdate(1,s))
-      self.connect(self.referentialCombo, QtCore.SIGNAL('currentIndexChanged(QString)'), self.updateCoordsDisplay)
-      self.connect(self.electrodeRefCheck, QtCore.SIGNAL('stateChanged(int)'), self.updateElectrodeView)
-      self.connect(self.electrodeRefRotationSlider, QtCore.SIGNAL('valueChanged(int)'), self.updateElectrodeViewRotation)
+      self.loadPatientButton.clicked.connect(self.loadPatient)
+      self.changePatientButton.clicked.connect(self.changePatient)
+      self.patientList.itemDoubleClicked.connect(lambda x:self.loadPatient())
+      self.protocolCombo.currentIndexChanged[int].connect(self.updateBrainvisaProtocol)
+      self.filterSiteCombo.currentIndexChanged[int].connect(self.filterSubjects)
+      self.filterYearCombo.currentIndexChanged[int].connect(self.filterSubjects)
+      self.addElectrodeButton.clicked.connect(self.addElectrode)
+      self.removeElectrodeButton.clicked.connect(self.removeElectrode)
+      self.nameEdit.editingFinished.connect(self.editElectrodeName)
+      self.targetButton.clicked.connect(self.updateTarget)
+      self.entryButton.clicked.connect(self.updateEntry)
+      self.electrodeList.currentRowChanged.connect(self.electrodeSelect)
+      self.electrodeList.itemDoubleClicked.connect(self.electrodeGo)
+      self.contactList.itemClicked.connect(self.contactSelect)
+      self.contactList.itemDoubleClicked.connect(self.contactGo)
+      self.typeComboBox.currentIndexChanged[str].connect(self.updateElectrodeModel)
+      # itemClicked.connect(QListWidgetItem*) , currentItemChanged ( QListWidgetItem * current, QListWidgetItem * previous ), currentRowChanged ( int currentRow )
+      self.electrodeLoadButton.clicked.connect(self.loadElectrodes)
+      self.electrodeSaveButton.clicked.connect(self.saveElectrodes)
+      self.normalizeExportButton.clicked.connect(self.normalizeExportElectrodes)
+      #self.marsatlasExportButton, QtCore.SIGNAL.connect('clicked()'),self.parcelsExportElectrodes)
+      self.colorConfigButton.clicked.connect(self.configureColors)
+      self.dispModeCombo.currentIndexChanged[int].connect(self.updateDispMode)
+      self.windowCombo1.currentIndexChanged[str].connect(lambda s: self.windowUpdate(0,s))
+      self.windowCombo2.currentIndexChanged[str].connect(lambda s: self.windowUpdate(1,s))
+      self.referentialCombo.currentIndexChanged[str].connect(self.updateCoordsDisplay)
+      self.electrodeRefCheck.stateChanged.connect(self.updateElectrodeView)
+      self.electrodeRefRotationSlider.valueChanged.connect(self.updateElectrodeViewRotation)
 
-      self.connect(self.Clipping_checkbox,QtCore.SIGNAL('clicked()'),self.clippingUpdate)
-      self.connect(self.makefusionButton,QtCore.SIGNAL('clicked()'),self.makeFusion)
-      self.connect(self.generateResectionArray,QtCore.SIGNAL('clicked()'),self.generateResection)
-      self.connect(self.validateROIresection,QtCore.SIGNAL('clicked()'),self.ROIResectiontoNiftiResection)
-      self.connect(self.deleteMarsAtlasfiles,QtCore.SIGNAL('clicked()'),self.DeleteMarsAtlasFiles)
-      self.connect(self.generateDictionariesComboBox,QtCore.SIGNAL('activated(QString)'),self.generateDictionaries)
-      self.connect(self.ImportTheoriticalImplantation,QtCore.SIGNAL('clicked()'),self.importRosaImplantation)
-      self.connect(self.approximateButton,QtCore.SIGNAL('clicked()'),self.approximateElectrode)
+      self.Clipping_checkbox.clicked.connect(self.clippingUpdate)
+      self.makefusionButton.clicked.connect(self.makeFusion)
+      self.generateResectionArray.clicked.connect(self.generateResection)
+      self.validateROIresection.clicked.connect(self.ROIResectiontoNiftiResection)
+      self.deleteMarsAtlasfiles.clicked.connect(self.DeleteMarsAtlasFiles)
+      self.generateDictionariesComboBox.activated[str].connect(self.generateDictionaries)
+      self.ImportTheoriticalImplantation.clicked.connect(self.importRosaImplantation)
+      self.approximateButton.clicked.connect(self.approximateElectrode)
 
       prefpath_imageimport = os.path.join(os.path.expanduser('~'), '.imageimport')
       try:
@@ -627,7 +626,7 @@ class LocateElectrodes(QtGui.QDialog):
            #messagebox.closeEvent = close_messagebox
            #messagebox.close()
         #self.time_to_wait -= 1
-     #self.connect(self.timer2,QtCore.SIGNAL("timeout()"),decompte)
+     #self.timer2.timeout.connect(decompte)
      #self.timer2.start(1000)
      #messagebox.exec_()
 
@@ -1226,7 +1225,7 @@ class LocateElectrodes(QtGui.QDialog):
                 pos_bipol = (numpy.array(plotsT1Ref_sorted[i_bipole.split()[0].title()]) + numpy.array(plotsT1Ref_sorted[i_bipole.split()[2].title()]))/2
               except:
                   print("problem plotsT1Ref")
-                pdb.set_trace()
+                  pdb.set_trace()
               entry_bipole = numpy.array(plotsT1Ref_sorted[i_bipole.split()[0].title()])
               #orient_vector_bip = (numpy.array(plotsT1Ref_sorted[i_bipole.split()[0]]) - numpy.array(plotsT1Ref_sorted[i_bipole.split()[2]]))/linalg.norm((numpy.array(plotsT1Ref_sorted[i_bipole.split()[0]]) - numpy.array(plotsT1Ref_sorted[i_bipole.split()[2]])))
               #il faut un orient vector
@@ -4453,7 +4452,7 @@ if __name__ == "__main__":
   main()
 
 #if __name__ == "__main__":
-#    from PyQt4.QtGui import qApp
+#    from PyQt5.QtGui import qApp
 #    app = qApp
 #    main(0)
 

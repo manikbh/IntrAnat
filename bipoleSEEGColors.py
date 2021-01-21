@@ -2,7 +2,7 @@
 
 import sys, os, pickle, glob, numpy, re, string, time, subprocess, json, copy, csv
 
-from PyQt4 import QtGui, QtCore, uic, Qt
+from PyQt5 import QtGui, QtCore, uic, Qt
 
 from numpy import *
 from math import sqrt
@@ -14,7 +14,7 @@ from brainvisa import axon
 #from soma.aims.spmnormalizationreader import readSpmNormalization
 from brainvisa import anatomist
 from brainvisa.data import neuroHierarchy
-import registration
+from brainvisa import registration
 
 from externalprocesses import *
 from referentialconverter import ReferentialConverter

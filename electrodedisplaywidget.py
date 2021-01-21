@@ -8,7 +8,7 @@
 # License GNU GPL v3
 #
 #
-from PyQt4 import QtGui, QtCore, uic
+from PyQt5 import QtGui, QtCore, uic
 
 import sys, pickle, shutil, traceback, os, json, re, numpy, csv
 
@@ -16,7 +16,7 @@ import sys, pickle, shutil, traceback, os, json, re, numpy, csv
 from brainvisa import axon
 from brainvisa import anatomist
 from soma import aims
-import registration
+from brainvisa import registration
 
 from locateElectrodes import createElectrode, getPlotsCenters, getPlots, getPlotsNames, createBipole
 from referentialconverter import ReferentialConverter

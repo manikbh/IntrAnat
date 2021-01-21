@@ -8,7 +8,7 @@
 #
 
 import re, shutil
-from PyQt4 import QtCore
+from PyQt5 import QtCore
 from externalprocesses import *
 
 
