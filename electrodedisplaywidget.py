@@ -28,13 +28,10 @@ from brainvisa.data.writediskitem import WriteDiskItem
 from brainvisa.data import neuroHierarchy
 from readSulcusLabelTranslationFile import *
 from readFreesurferLabelFile import *
-from externalprocesses import PythonExecutor
-from checkSpmVersion import *
+# from externalprocesses import PythonExecutor
 from readFunctionalTractography import *
 from scipy import spatial as sc_sp
-#from numpy.matlib import repmat
 from collections import OrderedDict
-import control_ftract
 from locateElectrodes import natural_keys
 
 from bipoleSEEGColors import bipoleSEEGColors
@@ -162,17 +159,17 @@ class ElectrodeDisplayWidget(QtGui.QWidget):
     self.setStatus(u"Tasks in progress : "+str(self.taskCounter))
     return self.taskCounter
 
-  def startTask(self, taskFunction):
-    pe = PythonExecutor(taskFunction)
-    self.tasks.append(pe)
-    # Remove it from the list of threads when finished
-    pe.finished.connect(lambda th=pe:self.taskFinished(th))
-    self.incTaskCounter()
-    pe.start()
+#   def startTask(self, taskFunction):
+#     pe = PythonExecutor(taskFunction)
+#     self.tasks.append(pe)
+#     # Remove it from the list of threads when finished
+#     pe.finished.connect(lambda th=pe:self.taskFinished(th))
+#     self.incTaskCounter()
+#     pe.start()
 
-  def taskFinished(self, thread):
-    self.tasks.remove(thread)
-    self.decTaskCounter()
+#   def taskFinished(self, thread):
+#     self.tasks.remove(thread)
+#     self.decTaskCounter()
 
   def setTemplate(self, templ):
     """Set the template used as a common referential"""

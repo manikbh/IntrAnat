@@ -140,7 +140,8 @@ class ElectrodeModel:
 
   def updateDisplay(self):
     self.clearDisplay()
-    for name in self.cylinders:
+    # Sort objects by name so that Elements/Plot always have the same order, hence same colors
+    for name in sorted(self.cylinders, reverse=True):
       self.displayCylinder(name)
 
   def updateDisplayCylinder(self, name):
